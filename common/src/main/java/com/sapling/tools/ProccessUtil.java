@@ -16,8 +16,6 @@ public class ProccessUtil {
         if (split.length != 2) {
             throw new RuntimeException("Got unexpected process name: " + name);
         }
-        ManagementFactory.getRuntimeMXBean().getStartTime()
-
         return split[0];
     }
 
