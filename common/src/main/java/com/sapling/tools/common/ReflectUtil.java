@@ -41,7 +41,7 @@ public class ReflectUtil {
     public static Map<String, Object> getFieldValueMap(Object instance) {
         Class clazz = instance.getClass();
         Map<String, Object> retMap = new HashMap<>();
-        Field[] fields = clazz.getDeclaredFields();
+        Field[] fields = clazz.getFields();
         for (Field field : fields) {
             field.setAccessible(true);
             try {

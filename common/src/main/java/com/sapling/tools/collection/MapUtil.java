@@ -23,6 +23,17 @@ public class MapUtil {
     }
 
     /**
+     * 将对象的属性与值转换为map
+     *
+     * @param object 对象数据
+     * @param includeGetMethod 包含get方法
+     * @return 对象数据的map
+     */
+    public static Map objectToMap(Object object,boolean includeGetMethod) {
+        return ReflectUtil.getFieldValueMap(object);
+    }
+
+    /**
      * 将map按照k-v，实例化一个实例对象
      *
      * @param clazz 对象类型
