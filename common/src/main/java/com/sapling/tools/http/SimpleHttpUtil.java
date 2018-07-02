@@ -13,6 +13,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author weizhou
@@ -85,7 +86,7 @@ public class SimpleHttpUtil {
         return httpClient.execute(httpRequest);
     }
 
-    protected static HttpResponse doFormRequest(HttpClient httpClient, HttpEntityEnclosingRequestBase httpRequest, Map<String, String> paramters, Header... headers) throws IOException {
+    public static HttpResponse doFormRequest(HttpClient httpClient, HttpEntityEnclosingRequestBase httpRequest, Map<String, String> paramters, Header... headers) throws IOException {
         if (paramters != null && paramters.size() > 0) {
             HttpEntity httpEntity = new UrlEncodedFormEntity(genFormParams(paramters));
             httpRequest.setEntity(httpEntity);
@@ -94,9 +95,9 @@ public class SimpleHttpUtil {
         return httpClient.execute(httpRequest);
     }
 
-    private static List<NameValuePair> genFormParams(Map<String, String> paramters) {
+    public static List<NameValuePair> genFormParams(Map<String, String> paramters) {
         List<NameValuePair> list = new ArrayList<>();
-        paramters.entrySet().stream().map(entity -> list.add(new BasicNameValuePair(entity.getKey(), entity.getValue())));
+        paramters.entrySet().forEach(entity -> list.add(new BasicNameValuePair(entity.getKey(), entity.getValue())));
         return list;
     }
 
@@ -106,17 +107,17 @@ public class SimpleHttpUtil {
         }
     }
 
-    private static String genGetUrlWithParamters(String url, Map<String, String> paramters) {
+    public static String genGetUrlWithParamters(String url, Map<String, String> paramters) {
         StringBuilder sb = new StringBuilder();
+        paramters = new TreeMap<>(paramters);
         sb.append(url);
         if (paramters != null && paramters.size() > 0) {
             if (!url.contains("?")) {
                 sb.append("?");
-            }
-            if (!url.endsWith("&")){
+            } else {
                 sb.append("&");
             }
-            paramters.entrySet().stream().map(entity -> sb.append(entity.getKey()).append("=").append(entity.getValue()).append("&"));
+            paramters.entrySet().forEach(entity -> sb.append(entity.getKey()).append("=").append(entity.getValue()).append("&"));
         }
         return sb.substring(0, sb.length() - 1);
     }
