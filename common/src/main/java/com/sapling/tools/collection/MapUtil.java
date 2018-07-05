@@ -2,7 +2,9 @@ package com.sapling.tools.collection;
 
 import com.sapling.tools.common.ReflectUtil;
 
+import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author zhouwei
@@ -25,11 +27,11 @@ public class MapUtil {
     /**
      * 将对象的属性与值转换为map
      *
-     * @param object 对象数据
+     * @param object           对象数据
      * @param includeGetMethod 包含get方法
      * @return 对象数据的map
      */
-    public static Map objectToMap(Object object,boolean includeGetMethod) {
+    public static Map objectToMap(Object object, boolean includeGetMethod) {
         return ReflectUtil.getFieldValueMap(object);
     }
 
@@ -83,5 +85,23 @@ public class MapUtil {
             }
         }
         return true;
+    }
+
+    /**
+     * 获取map中的值，如果没有返回默认值
+     *
+     * @param map          map
+     * @param key          key
+     * @param defaultValue 默认值
+     * @return value
+     */
+    public static Object getOrElse(Map<Object, Object> map, String key, Object defaultValue) {
+        if (map == null || map.size() == 0) {
+            return defaultValue;
+        }
+        if (!map.containsKey(key)) {
+            return defaultValue;
+        }
+        return map.get(key);
     }
 }
