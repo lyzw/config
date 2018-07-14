@@ -25,7 +25,7 @@ public class StringUtil {
         return sb.toString();
     }
 
-    public static String underLineToCamel(String value) {
+    public static String toCamel(String value) {
         if (isEmpty(value)) {
             return value;
         }
@@ -38,6 +38,24 @@ public class StringUtil {
         Arrays.asList(arrays).subList(1, arrays.length).forEach(item -> sb.append(upperFirstLetter(item)));
         return sb.toString();
     }
+
+    public static String toUnderLine(String value){
+        if (isEmpty(value)) {
+            return value;
+        }
+        StringBuilder sb = new StringBuilder();
+
+        char[] chars = value.toCharArray();
+        for (char c:chars){
+            if (Character.isUpperCase(c)){
+                sb.append("_");
+            }
+            sb.append(Character.toLowerCase(c));
+        }
+        return sb.toString();
+    }
+    
+    
 
 
 }

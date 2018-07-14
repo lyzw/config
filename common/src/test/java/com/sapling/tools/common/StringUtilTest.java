@@ -21,18 +21,30 @@ public class StringUtilTest {
 
     @Test
     public void upperFirstLetter() {
-        assertEquals("AaAaAa",StringUtil.upperFirstLetter("aaAaAa"));
-        assertEquals("1aAaAa",StringUtil.upperFirstLetter("1aAaAa"));
-        assertEquals("_aAaAa",StringUtil.upperFirstLetter("_aAaAa"));
-        assertEquals("",StringUtil.upperFirstLetter(""));
-        assertEquals(null,StringUtil.upperFirstLetter(null));
+        assertEquals("AaAaAa", StringUtil.upperFirstLetter("aaAaAa"));
+        assertEquals("1aAaAa", StringUtil.upperFirstLetter("1aAaAa"));
+        assertEquals("_aAaAa", StringUtil.upperFirstLetter("_aAaAa"));
+        assertEquals("", StringUtil.upperFirstLetter(""));
+        assertEquals(null, StringUtil.upperFirstLetter(null));
 
     }
 
     @Test
     public void underLineToCamel() {
-        assertEquals("aaAaAa",StringUtil.underLineToCamel("aa_aa_aa"));
-        assertEquals("aa1aAa",StringUtil.underLineToCamel("aa_1a_aa"));
+        assertEquals("aaAaAa", StringUtil.toCamel("aa_aa_aa"));
+        assertEquals("aa1aAa", StringUtil.toCamel("aa_1a_aa"));
+        assertEquals("", StringUtil.toCamel(""));
+        assertEquals(null, StringUtil.toCamel(null));
+        assertEquals("aaaaa", StringUtil.toCamel("aaaaa"));
 
+    }
+
+    @Test
+    public void toUnderLine() {
+
+        assertEquals("aa_aa_aa", StringUtil.toUnderLine("aaAaAa"));
+        assertEquals("aa_a_ass", StringUtil.toUnderLine("aaAAss"));
+        assertEquals("", StringUtil.toUnderLine(""));
+        assertEquals(null, StringUtil.toUnderLine(null));
     }
 }

@@ -126,4 +126,29 @@ public class DateUtil {
         return calendar.getTime();
     }
 
+    public static Long toUnixTimestamp(Date date) {
+        return date.getTime() / 1000;
+    }
+
+    public static Date fromUnixTimestamp(Long timestamp) {
+        return fromTimestamp(timestamp * 1000);
+    }
+
+    public static Date fromTimestamp(Long timestamp) {
+        Date date = new Date();
+        date.setTime(timestamp);
+        return date;
+    }
+
+    /**
+     * 将influx时序数据库的时间戳转换为日期
+     * @param timestamp
+     * @return
+     */
+    public static Date fromInfluxdbTimestamp(Long timestamp){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timestamp/1000000);
+        return calendar.getTime();
+    }
+
 }

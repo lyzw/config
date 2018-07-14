@@ -82,9 +82,9 @@ public class ObjectUtil {
      * @throws IOException IO异常
      */
     public static byte[] ObjectToBytes(Object object) throws IOException {
-        if (object == null) {
-            return null;
-        }
+//        if (object == null) {
+//            return null;
+//        }
         byte[] bytes = null;
         ObjectOutputStream outputStream = null;
         ByteArrayOutputStream byteArrayOutputStream = null;

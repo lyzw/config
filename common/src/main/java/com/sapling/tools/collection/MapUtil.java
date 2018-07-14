@@ -2,9 +2,9 @@ package com.sapling.tools.collection;
 
 import com.sapling.tools.common.ReflectUtil;
 
-import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * @author zhouwei
@@ -104,4 +104,36 @@ public class MapUtil {
         }
         return map.get(key);
     }
+
+
+    public static void main(String[] args) {
+        Map map = new HashMap();
+        new MapWrapper(map).put("1","2").put("3","4");
+        System.out.println(map);
+    }
+
+}
+
+class MapWrapper<K, V> {
+
+    Map<K, V> owner;
+
+    public MapWrapper(Map<K, V> owner) {
+        this.owner = owner;
+    }
+
+    public MapWrapper put(K key, V value) {
+        owner.put(key, value);
+        return this;
+    }
+
+    public Map<K, V> owner() {
+        return owner;
+    }
+
+    public Map<K, V> get() {
+        return owner;
+    }
+
+
 }
